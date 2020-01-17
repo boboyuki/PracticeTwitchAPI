@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: url(https://lolstatic-a.akamaihd.net/lolkit/1.1.6/resources/images/bg-default.jpg);
+  background-attachment: fixed;
+}
+
+.wrapper {
+  margin: 0 auto;
+  width: 1000px;
+  padding-top: 33px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.box {
+  width: 300px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  -webkit-transition: -webkit-filter 0.5s ease-in ,-webkit-box-shadow 0.3s;
+  transition: -webkit-filter 0.5s ease-in ,-webkit-box-shadow 0.3s;
+  transition: filter 0.5s ease-in ,box-shadow 0.3s;
+  transition: filter 0.5s ease-in ,box-shadow 0.3s ,-webkit-filter 0.5s ease-in ,-webkit-box-shadow 0.3s;
+}
+
+.box:hover {
+  -webkit-box-shadow: 6px 6px 6px 1px rgba(0, 0, 0, 0.5);
+          box-shadow: 6px 6px 6px 1px rgba(0, 0, 0, 0.5);
+  -webkit-filter: brightness(1.35);
+          filter: brightness(1.35);
+}
+
+.box:nth-child(3n) {
+  margin-right: 0px;
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.preview {
+  width: 100%;
+}
+
+img {
+  width: 100%;
+}
+
+.title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 10px;
+}
+
+.title-img {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  border: 0;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.title-chlname {
+  color: white;
+  width: 150px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title-name {
+  color: white;
+}
+/*# sourceMappingURL=style.css.map */
