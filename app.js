@@ -26,35 +26,36 @@ function getData(callback) {
         }
     }
 }
-
-getData((err,data) => {
-    const streams = data.streams;
-    nowoffset += 10;
-    isloading = false;
-
-    for(let stream of streams){
-        let link = document.createElement('a');
-        link.setAttribute('href', stream.channel.url);
-        link.setAttribute('target', '_blank');
-        link.innerHTML = 
-        `
-            <div class="box">
-                <div class="preview">
-                    <img src="${stream.preview.medium}" alt="preview" onload="this.style.opacity = 1" >
-                </div>
-                    <div class="title">
-                    <img class="title-img" src="${stream.channel.logo}" alt="logo" onload="this.style.opacity = 1">
-                    <div class="title-intro">
-                        <p class="title-chlname">${stream.channel.status}</p>
-                        <p class="title-name">${stream.channel.display_name}</p>
-                    </div>
-                </div>
-                </div>
-        `;
-        wrapper.appendChild(link);
-    }
+function appendData() {
+    getData((err,data) => {
+        const streams = data.streams;
+        nowoffset += 10;
+        isloading = false;
     
+        for(let stream of streams){
+            let link = document.createElement('a');
+            link.setAttribute('href', stream.channel.url);
+            link.setAttribute('target', '_blank');
+            link.innerHTML = 
+            `
+                <div class="box">
+                    <div class="preview">
+                        <img src="${stream.preview.medium}" alt="preview" onload="this.style.opacity = 1" >
+                    </div>
+                        <div class="title">
+                        <img class="title-img" src="${stream.channel.logo}" alt="logo" onload="this.style.opacity = 1">
+                        <div class="title-intro">
+                            <p class="title-chlname">${stream.channel.status}</p>
+                            <p class="title-name">${stream.channel.display_name}</p>
+                        </div>
+                    </div>
+                    </div>
+            `;
+            wrapper.appendChild(link);
+        }
     });
+}
+
 
  //偵測滾動
  window.addEventListener("DOMContentLoaded",function() {
