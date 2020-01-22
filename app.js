@@ -6,11 +6,17 @@ const client_id = "z2cjxqc0jty8ehrd31epyku9mjj1eq";
 
 let nowoffset = 0;
 let isloading = false;
-let Lang = 'zh-tw';
 
 //切換語言
+var I18N = {
+    en: require('./en.js'),
+    'zh-tw': require('./zh-tw.js')
+}
+
+let Lang = 'zh-tw';
+
 function changeLang(lang) {
-    document.querySelector('.menu__title').textContent = window.I18N[lang]['Title'];
+    document.querySelector('.menu__title').textContent = I18N[lang]['Title'];
     Lang = lang;
     while (wrapper.firstChild) {
         wrapper.removeChild(wrapper.firstChild);
@@ -72,8 +78,11 @@ function appendData(lang) {
 
 
  //偵測滾動
- window.addEventListener("DOMContentLoaded",function() {
+ window.addEventListener("DOMContentLoaded",(e) =>　{
+    document.querySelector('.lang-zh-tw').addEventListener('click',()=>{changeLang('zh-tw')});
+    document.querySelector('.lang-en').addEventListener('click',()=>{changeLang('en')});
     appendData(Lang);
+    console.log(e);
     window.addEventListener("scroll",loadData);
  });
 
