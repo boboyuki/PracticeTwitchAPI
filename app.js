@@ -2,22 +2,35 @@ const wrapper = document.querySelector('.wrapper');
 
 const game = "Overwatch";
 const limit = 10;
-let nowoffset = 0;
 const client_id = "z2cjxqc0jty8ehrd31epyku9mjj1eq";
-let url = `https://api.twitch.tv/kraken/streams/?api_version=5&client_id=${client_id}&game=${game}&limit=${limit}&offset=${nowoffset}`;
-console.log(url);
 
+let nowoffset = 0;
 let isloading = false;
+let Lang = 'zh-tw';
 
-function getData(callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("get",`https://api.twitch.tv/kraken/streams/?api_version=5&client_id=${client_id}&game=${game}&limit=${limit}&offset=${nowoffset}`,true);
+//切換語言
+function changeLang(lang) {
+    document.querySelector('.menu__title').textContent = window.I18N[lang]['Title'];
+    Lang = lang;
+    while (wrapper.firstChild) {
+        wrapper.removeChild(wrapper.firstChild);
+    }
+    nowoffset = 0; //資料歸零
+    appendData(Lang);
+    console.log(lang);
+}
+
+//串接資料
+function getData(lang,callback) {
+    isloading =true;
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("get",`https://api.twitch.tv/kraken/streams/?api_version=5&client_id=${client_id}&game=${game}&limit=${limit}&offset=${nowoffset}&language=${lang}`,true);
     xhr.setRequestHeader('Client-ID',client_id);
     xhr.send();
     xhr.onload= function() {
         if(this.readyState === 4 && this.status === 200) {
             const data = JSON.parse(this.responseText);
-            isloading =true;
             callback(null,data); 
         }
     
@@ -26,8 +39,8 @@ function getData(callback) {
         }
     }
 }
-function appendData() {
-    getData((err,data) => {
+function appendData(lang) {
+    getData(lang,(error,data) => {
         const streams = data.streams;
         nowoffset += 10;
         isloading = false;
@@ -36,6 +49,7 @@ function appendData() {
             let link = document.createElement('a');
             link.setAttribute('href', stream.channel.url);
             link.setAttribute('target', '_blank');
+            link.style.textDecoration = "none";
             link.innerHTML = 
             `
                 <div class="box">
@@ -59,15 +73,14 @@ function appendData() {
 
  //偵測滾動
  window.addEventListener("DOMContentLoaded",function() {
-    appendData();
+    appendData(Lang);
     window.addEventListener("scroll",loadData);
  });
 
 function loadData() {
-    console.log(window.scrollY,window.innerHeight,document.body.clientHeight);
     if(window.scrollY + window.innerHeight >= document.body.clientHeight){
         if(!isloading){
-            appendData();
+            appendData(Lang);
         }
     }
 }

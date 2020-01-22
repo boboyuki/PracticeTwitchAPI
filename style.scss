@@ -17,6 +17,28 @@
     flex-wrap: wrap;
     justify-content: flex-start;
   }
+  .menu {
+    color: #fff;
+    width: 100%; 
+    margin: 10px auto;
+    text-align: center;
+  }
+
+  .menu__list{
+    display: flex;
+    list-style: none;
+    font-size: 20px;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .menu__item {
+    margin-right: 10px;
+    &:hover {
+      color: gold;
+    }
+    cursor: pointer;
+  }
   
   .box {
     background-color: rgba(0,0,0,0.75);
