@@ -1,0 +1,9 @@
+node_modules
+package.json
+webpack.config.js
+style.scss
+dist\style\style.min.css
+dist\style\style.min.css.map
+.eslintignore
+.eslintrc.js
+gulpfile.js
